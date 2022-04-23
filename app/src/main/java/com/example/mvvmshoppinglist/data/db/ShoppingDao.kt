@@ -1,7 +1,8 @@
-package com.example.mvvmshoppinglist
+package com.example.mvvmshoppinglist.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.mvvmshoppinglist.data.db.entities.ShoppingItem
 
 // Everything need to be annotation to use room
 @Dao
