@@ -14,9 +14,19 @@ import com.example.mvvmshoppinglist.ui.shoppinglist.AddDialogListener
 import com.example.mvvmshoppinglist.ui.shoppinglist.AddShoppingItemDialog
 import com.example.mvvmshoppinglist.ui.shoppinglist.ShoppingViewModel
 import com.example.mvvmshoppinglist.ui.shoppinglist.ShoppingViewModelFactory
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
 @Suppress("DEPRECATION")
-class ShoppingActivity : AppCompatActivity() {
+class ShoppingActivity : AppCompatActivity(), KodeinAware {
+
+    // kodein
+    override val kodein by kodein()
+
+    // factory instance()
+    private val factory: ShoppingViewModelFactory by instance()
 
     // view binding
     private lateinit var binding: ActivityShoppingBinding
@@ -26,15 +36,6 @@ class ShoppingActivity : AppCompatActivity() {
         binding = ActivityShoppingBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-        // init database
-        val database = ShoppingDatabase(this)
-
-        // init repository
-        val repository = ShoppingRepository(database)
-
-        // init view model factory
-        val factory = ShoppingViewModelFactory(repository)
 
         // init view model
         val viewModel = ViewModelProviders.of(this, factory).get(ShoppingViewModel::class.java)
