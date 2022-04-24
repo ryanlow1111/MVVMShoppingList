@@ -51,6 +51,7 @@ class ShoppingItemAdapter(var items: List<ShoppingItem>, private val viewModel: 
         }
     }
 
+    // return item count
     override fun getItemCount(): Int {
         return items.size
     }
